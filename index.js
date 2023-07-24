@@ -10,7 +10,7 @@ const PORT = process.env.PORT || process.env.DEV_PORT;
 // Middleware
 app.use(
   cors({
-    origin: "*",
+    origin: process.env.CORS.split(", "),
     credentials: true,
   })
 );

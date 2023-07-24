@@ -20,7 +20,7 @@ const routes = {
     process.env.NODE_ENV == "production"
       ? process.env.AUTHENTICATIOIN_SERVICE_PROD
       : process.env.AUTHENTICATIOIN_SERVICE_DEV
-  }/api/user/`,
+  }/api/user/signout`,
 
   //   authorization_service
   "/api/authorization_service/getUser": `${
@@ -33,6 +33,13 @@ const routes = {
       ? process.env.AUTHORIZATION_SERVICE_PROD
       : process.env.AUTHORIZATION_SERVICE_DEV
   }/api/auth/`,
+
+  //doctor_reccomandation_service
+  "/api/doctor_reccomandation_service/": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.DOC_RECMMONDATION_SERVICE_PROD
+      : process.env.DOC_RECMMONDATION_SERVICE_DEV
+  }/api/doc/`,
   // Add more routes and microservices as needed
 };
 
