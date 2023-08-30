@@ -17,22 +17,28 @@ function initializeSocketServer(server) {
     logger.info(`New Socket Connnected ${socket.handshake.address}`);
 
     socket.on("setup", async (data) => {
-      const authToken = await socket.handshake.headers.authorization; // Get the authorization token from the header
+       const authToken = await data.headers.authorization; // Get the authorization token from the heade
 
       if (!authToken) {
         // Handle the case where the token is missing
-        socket.emit("error", "Authorization token missing");
+        socket.emit("error_message", "Authorization token missing");
         return;
       }
 
-      const isAuth = await AuthSocket({ authToken });
+      const isAuth = await AuthSocket(authToken);
 
       if (!isAuth) {
-        socket.emit("Ayur Mind Gateway Socket Auth Failed");
+        socket.emit("error", "Ayur Mind Gateway Socket Auth Failed");
         return;
       }
       socket.join(data.user._id);
-      socket.emit(
+     logger.info(
+        "Ayur Mind Gateway Socket Connected " +
+          socket.handshake.address +
+          " user id " +
+          data.user._id
+      );
+      socket.emit("connected",
         "Ayur Mind Gateway Socket Connected " +
           socket.handshake.address +
           " user id " +
@@ -57,12 +63,44 @@ function initializeSocketServer(server) {
             chatServiceSocketServer.emit("setup", emitData);
             break;
           }
+          case "join_chat": {
+            if (data.selectedChatId) {
+              const emitData = data.selectedChatId;
+              chatServiceSocketServer.emit("join chat", emitData);
+            }
+            break;
+          }
+          case "typing": {
+            if (data.selectedChatId) {
+              const emitData = data.selectedChatId;
+              chatServiceSocketServer.emit("typing", emitData);
+            }
+            break;
+          }
+          case "stop_typing": {
+            if (data.selectedChatId) {
+              const emitData = data.selectedChatId;
+              chatServiceSocketServer.emit("stop typing", emitData);
+            }
+            break;
+          }
+          case "new_message": {
+            if (data.chat) {
+              const emitData = data.chat;
+              chatServiceSocketServer.emit("new message", emitData);
+            }
+            break;
+          }
         }
       } else {
         socket.emit("error", "user data not diffined");
         socket.disconnect();
       }
     });
+
+      chatServiceSocketServer.on("connected", (data) => {
+        socket.emit("chat_connected", data);
+      });
 
       chatServiceSocketServer.on("message recieved", (newMessageRecieved) => {
         console.log(
@@ -80,6 +118,7 @@ function initializeSocketServer(server) {
     });
 
     socket.on("disconnect", () => {
+      socket.emit("socket_disconnect", "disconnect");
       logger.warn(`Gateway Socket Disconnected ` + socket.handshake.address);
     });
   });

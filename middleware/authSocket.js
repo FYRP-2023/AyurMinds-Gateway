@@ -1,6 +1,8 @@
 const { default: axios } = require("axios");
+const logger = require("../helpers/appLogger");
 
-const AuthSocket = async ({ authToken }) => {
+const AuthSocket = async (authToken) => {
+  let result = false
   await axios
     .post(
       `${
@@ -13,13 +15,14 @@ const AuthSocket = async ({ authToken }) => {
         headers: { Authorization: authToken },
       }
     )
-    .then((result) => {
-      return result;
+    .then((results) => {
+      result = results.status == 200;
     })
     .catch((err) => {
-      logger.warn(err.response.data);
-      return res.status(403).send("service access permission denieded");
+      logger.warn(...err.response.data);
+      result = false;
     });
+    return result;
 };
 
 module.exports = AuthSocket;

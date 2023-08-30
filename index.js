@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.set("trust proxy", 1);
 
 // Routes
-app.get("/", (req, res) => {
+app.post("/", (req, res) => {
   res.send("Ayur Minds Gateway");
 });
 
@@ -32,7 +32,7 @@ const routes = require("./configs/routes");
 
 // Middleware to handle authorization
 const authGateWay = require("./middleware/authGateway");
-const initializeSocketServer = require("./socket-server");
+
 app.use(authGateWay);
 
 // Middleware to forward the requests to the appropriate microservice
@@ -88,6 +88,7 @@ const server = app.listen(PORT, () => {
   logger.info(`Server is starting at ${PORT}`);
 });
 
+const initializeSocketServer = require("./socket-server");
 initializeSocketServer(server);
 
 // Handle unhandled promise rejections
