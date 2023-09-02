@@ -24,8 +24,7 @@ const authGateway = async (req, res, next) => {
         return res.status(403).send("service access permission denieded");
       });
   }
-
-  
+   
 
   next();
 };

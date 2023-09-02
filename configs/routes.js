@@ -40,6 +40,26 @@ const routes = {
       ? process.env.DOC_RECMMONDATION_SERVICE_PROD
       : process.env.DOC_RECMMONDATION_SERVICE_DEV
   }/api/doc/`,
+
+  //chat__service
+  "/api/chat_service/": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.CHAT_SERVICE_PROD
+      : process.env.CHAT_SERVICE_DEV
+  }/api/chat/`,
+  
+  "/api/chat_service/fetchChats": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.CHAT_SERVICE_PROD
+      : process.env.CHAT_SERVICE_DEV
+  }/api/chat/fetchChats`,
+
+  "/api/message_service/": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.CHAT_SERVICE_PROD
+      : process.env.CHAT_SERVICE_DEV
+  }/api/message/`,
+
   // Add more routes and microservices as needed
 };
 

@@ -5,6 +5,8 @@ const cors = require("cors");
 const logger = require("./helpers/appLogger");
 const axios = require("axios");
 const cookieParser = require("cookie-parser");
+const webSocketServer = require("websocket").server;
+const http = require("http");
 const PORT = process.env.PORT || process.env.DEV_PORT;
 
 // Middleware
@@ -22,14 +24,15 @@ app.use(cookieParser());
 app.set("trust proxy", 1);
 
 // Routes
-app.get("/", (req, res) => {
+app.post("/", (req, res) => {
   res.send("Ayur Minds Gateway");
 });
 
 const routes = require("./configs/routes");
 
 // Middleware to handle authorization
-const authGateWay = require("./middleware/authGateway")
+const authGateWay = require("./middleware/authGateway");
+
 app.use(authGateWay);
 
 // Middleware to forward the requests to the appropriate microservice
@@ -81,9 +84,12 @@ app.use((req, res) => {
 });
 
 // HTTP request logger
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   logger.info(`Server is starting at ${PORT}`);
 });
+
+const initializeSocketServer = require("./socket-server");
+initializeSocketServer(server);
 
 // Handle unhandled promise rejections
 process.on("unhandledRejection", (err) => {
