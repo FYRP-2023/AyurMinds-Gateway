@@ -47,7 +47,7 @@ const routes = {
       ? process.env.CHAT_SERVICE_PROD
       : process.env.CHAT_SERVICE_DEV
   }/api/chat/`,
-  
+
   "/api/chat_service/fetchChats": `${
     process.env.NODE_ENV == "production"
       ? process.env.CHAT_SERVICE_PROD
@@ -59,6 +59,23 @@ const routes = {
       ? process.env.CHAT_SERVICE_PROD
       : process.env.CHAT_SERVICE_DEV
   }/api/message/`,
+
+  "/api/doctor_service/": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.DOCTOR_SERVICE_PROD
+      : process.env.DOCTOR_SERVICE_DEV
+  }/api/doctor/`,
+
+  "/api/doctor_service/getDiseases": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.DOCTOR_SERVICE_PROD
+      : process.env.DOCTOR_SERVICE_DEV
+  }/api/doctor/getDiseases`,
+  "/api/doctor_service/updateDoctorDetails": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.DOCTOR_SERVICE_PROD
+      : process.env.DOCTOR_SERVICE_DEV
+  }/api/doctor/updateDoctorDetails`,
 
   // Add more routes and microservices as needed
 };
