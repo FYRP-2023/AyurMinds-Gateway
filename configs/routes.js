@@ -47,7 +47,7 @@ const routes = {
       ? process.env.CHAT_SERVICE_PROD
       : process.env.CHAT_SERVICE_DEV
   }/api/chat/`,
-  
+
   "/api/chat_service/fetchChats": `${
     process.env.NODE_ENV == "production"
       ? process.env.CHAT_SERVICE_PROD
@@ -59,6 +59,12 @@ const routes = {
       ? process.env.CHAT_SERVICE_PROD
       : process.env.CHAT_SERVICE_DEV
   }/api/message/`,
+
+  "/api/chatbot_service/": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.CHATBOT_SERVICE_PROD
+      : process.env.CHATBOT_SERVICE_DEV
+  }/api/messages/`,
 
   // Add more routes and microservices as needed
 };
