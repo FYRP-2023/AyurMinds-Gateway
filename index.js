@@ -31,13 +31,15 @@ app.post("/", (req, res) => {
 const routes = require("./configs/routes");
 
 // Middleware to handle authorization
-const authGateWay = require("./middleware/authGateway");
+// const authGateWay = require("./middleware/authGateway");
 
-app.use(authGateWay);
+// app.use(authGateWay);
 
 // Middleware to forward the requests to the appropriate microservice
 app.use((req, res) => {
   const { path, method, body, query } = req;
+  console.log("🚀 ~ file: index.js:41 ~ app.use ~ path:", path)
+  console.log("🚀 ~ file: index.js:41 ~ app.use ~ method:", method)
   const microserviceUrl = routes[path];
 
   console.log(`path: ${path}`);
@@ -93,8 +95,8 @@ const server = app.listen(PORT, () => {
   logger.info(`Server is starting at ${PORT}`);
 });
 
-const initializeSocketServer = require("./socket-server");
-initializeSocketServer(server);
+// const initializeSocketServer = require("./socket-server");
+// initializeSocketServer(server);
 
 // Handle unhandled promise rejections
 process.on("unhandledRejection", (err) => {

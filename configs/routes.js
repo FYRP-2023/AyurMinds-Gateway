@@ -6,6 +6,7 @@ const routes = {
       ? process.env.AUTHENTICATIOIN_SERVICE_PROD
       : process.env.AUTHENTICATIOIN_SERVICE_DEV
   }/api/user/signin`,
+  
   "/api/authentication_service/": `${
     process.env.NODE_ENV == "production"
       ? process.env.AUTHENTICATIOIN_SERVICE_PROD
@@ -60,6 +61,26 @@ const routes = {
       : process.env.CHAT_SERVICE_DEV
   }/api/message/`,
 
+  "/api/doctor_service/": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.DOCTOR_SERVICE_PROD
+      : process.env.DOCTOR_SERVICE_DEV
+  }/api/doctor/`,
+
+  "/api/doctor_service/getDiseases": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.DOCTOR_SERVICE_PROD
+      : process.env.DOCTOR_SERVICE_DEV
+  }/api/doctor/getDiseases`,
+
+  "/api/doctor_service/updateDoctorDetails": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.DOCTOR_SERVICE_PROD
+      : process.env.DOCTOR_SERVICE_DEV
+  }/api/doctor/updateDoctorDetails`,
+
+
+  //chatbot service
   "/api/chatbot_service/": `${
     process.env.NODE_ENV == "production"
       ? process.env.CHATBOT_SERVICE_PROD
