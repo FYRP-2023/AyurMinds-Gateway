@@ -1,1 +1,2 @@
 # AyurMinds-Gateway
+[![Build and deploy Node.js app to Azure Web App - ayurminds-gateway](https://github.com/FYRP-2023/AyurMinds-Gateway/actions/workflows/main_ayurminds-gateway.yml/badge.svg)](https://github.com/FYRP-2023/AyurMinds-Gateway/actions/workflows/main_ayurminds-gateway.yml)

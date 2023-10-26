@@ -44,6 +44,7 @@ function initializeSocketServer(server) {
           " user id " +
           data.user._id
       );
+      logger.info(`Setup Completed ${socket.handshake.address}`);
     });
 
     // Emit the "callService" event to the server on port 5008
@@ -61,12 +62,14 @@ function initializeSocketServer(server) {
               _id: data.user._id,
             };
             chatServiceSocketServer.emit("setup", emitData);
+            logger.info(`Chat Setup Completed`);
             break;
           }
           case "join_chat": {
             if (data.selectedChatId) {
               const emitData = data.selectedChatId;
               chatServiceSocketServer.emit("join chat", emitData);
+              logger.info(`join Chat Completed`);
             }
             break;
           }
@@ -88,6 +91,7 @@ function initializeSocketServer(server) {
             if (data.chat) {
               const emitData = data.chat;
               chatServiceSocketServer.emit("new message", emitData);
+              logger.info(`new message`);
             }
             break;
           }
@@ -100,13 +104,21 @@ function initializeSocketServer(server) {
 
       chatServiceSocketServer.on("connected", (data) => {
         socket.emit("chat_connected", data);
+        console.log("chat_connected", data);
       });
 
-      chatServiceSocketServer.on("message recieved", (newMessageRecieved) => {
-        console.log(
-          "🚀 ~ file: socket-server.js:79 ~ chatServiceSocketServer.on ~ newMessageRecieved:",
-          newMessageRecieved
-        );
+      chatServiceSocketServer.on("message_recieved", (newMessageRecieved) => {
+       var chat = newMessageRecieved.chat;
+
+       if (chat && !chat.users) return console.log("chat.users not defined");
+
+       chat.users.forEach((user) => {
+         console.log("🚀 ~ file: socket-server.js:121 ~ chat.users.forEach ~ user:", user)
+         if (user._id == newMessageRecieved.sender._id) {
+           socket.emit("message_recieved", newMessageRecieved);
+           console.log("🚀 ~ message_recieved", user._id);
+         }
+       });
       });
 
     socket.on("notification_service", (data) => {
