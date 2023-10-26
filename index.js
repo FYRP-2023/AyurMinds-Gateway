@@ -40,6 +40,10 @@ app.use((req, res) => {
   const { path, method, body, query } = req;
   const microserviceUrl = routes[path];
 
+  console.log(`path: ${path}`);
+  console.log(`microserviceUrl: ${microserviceUrl}`);
+  console.log(`method: ${method}`);
+
   if (!microserviceUrl) {
     return res.status(404).send("Microservice not found.");
   }
@@ -72,6 +76,7 @@ app.use((req, res) => {
         res.status(response.status).json(response.data);
       })
       .catch((error) => {
+        console.log(`error line 79: ${error}`);
         if (error.response) {
           res.status(error.response.status).json(error.response.data);
         } else {
