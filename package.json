@@ -9,7 +9,8 @@
     "dev": "nodemon index.js",
     "authentication_serv": "cd.. && cd AyurMinds-Authentication-Service && npm run dev",
     "authorization_serv": "cd.. && cd AyurMinds-Authorization-Service && npm run dev",
-    "con_dev": "concurrently --names AUTHENTICATION,AUTHORIZATION,GATEWAY -c auto  \"npm run authentication_serv\" \"npm run authorization_serv\" \"npm run dev\""
+    "messenger_serv": "cd.. && cd AyurMinds-Chat-Service- && npm run dev",
+    "con_dev": "concurrently --names AUTHENTICATION,AUTHORIZATION,MESSENGER,GATEWAY -c auto  \"npm run authentication_serv\" \"npm run authorization_serv\" \"npm run messenger_serv\" \"npm run dev\""
   },
   "keywords": [],
   "author": "",
