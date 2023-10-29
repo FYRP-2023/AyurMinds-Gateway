@@ -38,13 +38,11 @@ const routes = require("./configs/routes");
 // Middleware to forward the requests to the appropriate microservice
 app.use((req, res) => {
   const { path, method, body, query } = req;
-  console.log("🚀 ~ file: index.js:41 ~ app.use ~ path:", path)
-  console.log("🚀 ~ file: index.js:41 ~ app.use ~ method:", method)
   const microserviceUrl = routes[path];
 
-  console.log(`path: ${path}`);
-  console.log(`microserviceUrl: ${microserviceUrl}`);
-  console.log(`method: ${method}`);
+  // console.log(`path: ${path}`);
+  // console.log(`microserviceUrl: ${microserviceUrl}`);
+  // console.log(`method: ${method}`);
 
   if (!microserviceUrl) {
     return res.status(404).send("Microservice not found.");
