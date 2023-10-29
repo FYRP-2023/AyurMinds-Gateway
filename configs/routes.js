@@ -6,7 +6,7 @@ const routes = {
       ? process.env.AUTHENTICATIOIN_SERVICE_PROD
       : process.env.AUTHENTICATIOIN_SERVICE_DEV
   }/api/user/signin`,
-  
+
   "/api/authentication_service/": `${
     process.env.NODE_ENV == "production"
       ? process.env.AUTHENTICATIOIN_SERVICE_PROD
@@ -79,13 +79,18 @@ const routes = {
       : process.env.DOCTOR_SERVICE_DEV
   }/api/doctor/updateDoctorDetails`,
 
-
   //chatbot service
   "/api/chatbot_service/": `${
     process.env.NODE_ENV == "production"
       ? process.env.CHATBOT_SERVICE_PROD
       : process.env.CHATBOT_SERVICE_DEV
-  }/api/messages/`,
+  }/api/messages`,
+
+  "/api/chatbot_service/predict": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.CHATBOT_SERVICE_PROD
+      : process.env.CHATBOT_SERVICE_DEV
+  }/api/messages/predict`,
 
   // Add more routes and microservices as needed
 };
