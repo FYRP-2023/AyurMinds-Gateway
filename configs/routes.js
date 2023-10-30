@@ -73,11 +73,23 @@ const routes = {
       : process.env.DOCTOR_SERVICE_DEV
   }/api/doctor/getDiseases`,
 
+  "/api/doctor_service/createRateAndReview": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.DOCTOR_SERVICE_PROD
+      : process.env.DOCTOR_SERVICE_DEV
+  }/api/doctor/crateRateAndReview`,
+
   "/api/doctor_service/getAllDoctors": `${
     process.env.NODE_ENV == "production"
       ? process.env.DOCTOR_SERVICE_PROD
       : process.env.DOCTOR_SERVICE_DEV
   }/api/doctor/getAllDoctors`,
+
+  "/api/doctor_service/getDoctor": `${
+    process.env.NODE_ENV == "production"
+      ? process.env.DOCTOR_SERVICE_PROD
+      : process.env.DOCTOR_SERVICE_DEV
+  }/api/doctor/getDoctor`,
 
   "/api/doctor_service/updateDoctorDetails": `${
     process.env.NODE_ENV == "production"
